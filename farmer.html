@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List Produce - Farm Fresh</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🌿 Farmer Dashboard</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>List Your Fresh Produce</h2>
+    <form id="produceForm">
+      <input type="text" id="produceName" placeholder="Produce Name" required>
+      <input type="number" id="producePrice" placeholder="Price per kg (₹)" required>
+      <input type="text" id="produceImage" placeholder="Image URL" required>
+      <button type="submit">Add Produce</button>
+    </form>
+    <p id="msg"></p>
+  </section>
+
+  <script>
+    document.getElementById("produceForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("produceName").value;
+      const price = document.getElementById("producePrice").value;
+      const img = document.getElementById("produceImage").value;
+
+      let item = { name, price, img };
+      let items = JSON.parse(localStorage.getItem("produceList")) || [];
+      items.push(item);
+      localStorage.setItem("produceList", JSON.stringify(items));
+      
+      document.getElementById("msg").innerText = "✅ Produce listed successfully!";
+      this.reset();
+    });
+  </script>
+</body>
+</html>
